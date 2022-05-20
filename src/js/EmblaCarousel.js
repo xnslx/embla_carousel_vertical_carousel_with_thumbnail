@@ -9,6 +9,7 @@ import "../css/embla.css";
 
 const EmblaCarousel = ({ slides }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [viewportRef, embla] = useEmblaCarousel(
     {
       axis: "y",
@@ -33,6 +34,12 @@ const EmblaCarousel = ({ slides }) => {
     },
     [embla, emblaThumbs]
   );
+
+  const onScroll = useCallback(() => {
+    if (!embla) return;
+    const progress = Math.max(0, Math.min(1, embla.scrollProgress()));
+    setScrollProgress(progress * 100);
+  }, [embla, setScrollProgress]);
   // const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   // const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
 
@@ -51,11 +58,12 @@ const EmblaCarousel = ({ slides }) => {
   useEffect(() => {
     if (!embla) return;
     embla.on("select", onSelect);
+    embla.on("scroll", onScroll);
     onSelect();
-  }, [embla, onSelect]);
+  }, [embla, onSelect, onScroll]);
 
   return (
-    <div className="outer_container">
+    <div>
       <div className="embla">
         <div className="embla__viewport" ref={viewportRef}>
           <div className="embla__container">
@@ -72,18 +80,24 @@ const EmblaCarousel = ({ slides }) => {
             ))}
           </div>
         </div>
-      </div>
-      <div className="embla embla--thumb">
-        <div className="embla__viewport" ref={thumbViewportRef}>
-          <div className="embla__container__carousel embla__container--thumb">
-            {slides.map((index) => (
-              <Thumb
-                onClick={() => onThumbClick(index)}
-                selected={index === selectedIndex}
-                imgSrc={mediaByIndex(index)}
-                key={index}
-              />
-            ))}
+        <div className="embla__progress">
+          <div
+            className="embla__progress__bar"
+            style={{ transform: `translateX(${scrollProgress}%)` }}
+          />
+        </div>
+        <div className="embla embla--thumb">
+          <div className="embla__viewport" ref={thumbViewportRef}>
+            <div className="embla__container__carousel embla__container--thumb">
+              {slides.map((index) => (
+                <Thumb
+                  onClick={() => onThumbClick(index)}
+                  selected={index === selectedIndex}
+                  imgSrc={mediaByIndex(index)}
+                  key={index}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
