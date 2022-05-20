@@ -34,9 +34,9 @@
   -webkit-touch-callout: none;
   -khtml-user-select: none;
   -webkit-tap-highlight-color: transparent;
-  margin-top: -10px;
+  margin-top: -105px;
   /* height: 200px; */
-  height: 60%;
+  height: 300px;
 }
 
 .embla__slide {
@@ -100,6 +100,7 @@
 }
 
 .embla--thumb {
+  padding-top: 0;
   position: relative;
   width: 100px;
   margin-left: -150px;
@@ -108,14 +109,12 @@
 
 .embla__container--thumb {
   cursor: default;
-  /* margin-left: -8px; */
   display: flex;
   flex-direction: column;
   width: 50%;
 }
 
 .embla__slide--thumb {
-  /* padding-left: 8px; */
   min-width: 100%;
 }
 

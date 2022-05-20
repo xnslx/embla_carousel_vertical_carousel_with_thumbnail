@@ -14,7 +14,6 @@ const EmblaCarousel = ({ slides }) => {
 
   const [thumbViewportRef, emblaThumbs] = useEmblaCarousel({
     axis: "y",
-    containScroll: "keepSnaps",
     selectedClass: "",
     dragFree: true
   });
