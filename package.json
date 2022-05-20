@@ -6,6 +6,7 @@
   "main": "src/js/index.js",
   "dependencies": {
     "embla-carousel-react": "5.0.1",
+    "embla-carousel-wheel-gestures": "2.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-scripts": "4.0.3"

@@ -1,22 +1,30 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { PrevButton, NextButton } from "./EmblaCarouselButtons";
 import useEmblaCarousel from "embla-carousel-react";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
+
 import { mediaByIndex } from "../media";
 import { Thumb } from "./EmblaCarouselThumb";
 import "../css/embla.css";
 
 const EmblaCarousel = ({ slides }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [viewportRef, embla] = useEmblaCarousel({
-    axis: "y",
-    skipSnaps: false
-  });
+  const [viewportRef, embla] = useEmblaCarousel(
+    {
+      axis: "y",
+      skipSnaps: false
+    },
+    [WheelGesturesPlugin({ forceWheelAxis: "y" })]
+  );
 
-  const [thumbViewportRef, emblaThumbs] = useEmblaCarousel({
-    axis: "y",
-    selectedClass: "",
-    dragFree: true
-  });
+  const [thumbViewportRef, emblaThumbs] = useEmblaCarousel(
+    {
+      axis: "y",
+      selectedClass: "",
+      dragFree: true
+    },
+    [WheelGesturesPlugin({ forceWheelAxis: "y" })]
+  );
 
   const onThumbClick = useCallback(
     (index) => {
