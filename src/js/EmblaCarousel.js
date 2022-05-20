@@ -48,7 +48,7 @@ const EmblaCarousel = ({ slides }) => {
   }, [embla, onSelect]);
 
   return (
-    <div>
+    <div className="outer_container">
       <div className="embla">
         <div className="embla__viewport" ref={viewportRef}>
           <div className="embla__container">
@@ -66,9 +66,9 @@ const EmblaCarousel = ({ slides }) => {
           </div>
         </div>
       </div>
-      <div className="embla--thumb">
+      <div className="embla embla--thumb">
         <div className="embla__viewport" ref={thumbViewportRef}>
-          <div className="embla__container embla__container--thumb">
+          <div className="embla__container__carousel embla__container--thumb">
             {slides.map((index) => (
               <Thumb
                 onClick={() => onThumbClick(index)}
